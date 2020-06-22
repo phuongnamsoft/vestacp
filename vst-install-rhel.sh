@@ -464,6 +464,7 @@ check_result $? "Can't install EPEL repository"
 if [ "$remi" = 'yes' ] && [ ! -e "/etc/yum.repos.d/remi.repo" ]; then
     rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-$release.rpm
     check_result $? "Can't install REMI repository"
+    yum-config-manager --disable remi-safe
     yum-config-manager --enable remi
     yum-config-manager --enable remi-php73
 fi
