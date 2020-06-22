@@ -472,7 +472,7 @@ fi
 mrepo="/etc/yum.repos.d/MariaDB.repo"
 echo "[mariadb]" > $mrepo
 echo "name=MariaDB" >> $mrepo
-echo "baseurl=http://yum.mariadb.org/10.3/centos7-amd64" >> $mrepo
+echo "baseurl=http://yum.mariadb.org/10.4/centos7-amd64" >> $mrepo
 echo "gpgcheck=0" >> $mrepo
 echo "enabled=1" >> $mrepo
 
