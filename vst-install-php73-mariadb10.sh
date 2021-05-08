@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Pre-Install: ";
+echo "Pre-Install: "
 
 yum install curl wget -y
 
@@ -19,12 +19,28 @@ rpm -Uvh remi-release-7.rpm epel-release-latest-7.noarch.rpm
 yum install yum-utils -y
 yum-config-manager --enable remi-php$PHP_VERSION
 
-echo "Install VestaCP: ";
+echo "Install VestaCP: "
 
 curl -O http://vestacp.com/pub/vst-install.sh
 bash vst-install.sh --nginx yes --phpfpm yes --apache no --named no --remi no --vsftpd yes --proftpd no --iptables no --fail2ban no --quota no --exim no --dovecot no --spamassassin no --clamav no --softaculous no --mysql yes --postgresql no
 
 bash vst-crack.sh
 
+echo "Install Opcache, Memcached, Redis: "
 yum install php-opcache php-memcached php-memcache php-redis redis memcached php-imagick -y
+
+/bin/systemctl restart memcached.service
+/bin/systemctl enable memcached.service
+
+/bin/systemctl restart redis.service
+/bin/systemctl enable redis.service
+
+/bin/systemctl restart nginx.service
+/bin/systemctl enable nginx.service
+
+/bin/systemctl restart php-fpm.service
+/bin/systemctl enable php-fpm.service
+
+/bin/systemctl restart mysql.service
+/bin/systemctl enable mysql.service
 
